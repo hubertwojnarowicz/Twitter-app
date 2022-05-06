@@ -41,7 +41,7 @@ export default function EmailAndPasswordRegister({ isOpen, onDismiss }) {
             type="text"
             name="name"
             value={name}
-            onChange={(e) => setState({ ...state, name: e.target.value })}
+            onChange={(e) => setState({ ...state, name: e.target.value })} // add rest operator to fix the bug
           />
           <EmailInput
             aria-label="Enter Your Email"
