@@ -12,33 +12,16 @@ export default function EmailAndPasswordRegister({ isOpen, onDismiss }) {
     day: '1',
     year: '2022',
   });
+  const { name, email, password, month, day, year } = state;
 
   const disabledButton =
-    state.name === '' ||
-    state.email === '' ||
-    state.password === '' ||
-    state.month === '' ||
-    state.day === '' ||
-    state.year === '';
+    name === '' ||
+    email === '' ||
+    password === '' ||
+    month === '' ||
+    day === '' ||
+    year === '';
 
-  const handleSelectMonth = (e) => {
-    setState({ month: e.target.value });
-  };
-
-  const handleSelectDay = (e) => {
-    setState({ day: e.target.value });
-  };
-
-  const handleSelectYear = (e) => {
-    setState({ year: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log('hello');
-  };
-  console.log(state);
   return (
     <Overlay isOpen={isOpen} onDismiss={onDismiss}>
       <Content aria-label="Register Form">
@@ -51,27 +34,30 @@ export default function EmailAndPasswordRegister({ isOpen, onDismiss }) {
           </LogoWrapper>
         </ContentHeader>
         <ContentTitle>Create an account</ContentTitle>
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <NameInput
             aria-label="Enter Your First Name"
             placeholder="Name"
             type="text"
-            onChange={(e) => setState({ name: e.target.value })}
-            value={state.name || ''}
+            name="name"
+            value={name}
+            onChange={(e) => setState({ ...state, name: e.target.value })}
           />
           <EmailInput
             aria-label="Enter Your Email"
             placeholder="Email"
+            name="email"
             type="email"
-            onChange={(e) => setState({ email: e.target.value })}
-            value={state.email || ''}
+            value={email}
+            onChange={(e) => setState({ ...state, email: e.target.value })}
           />
           <PasswordInput
             aria-label="Enter Your Password"
+            name="password"
             placeholder="Password"
             type="password"
-            onChange={(e) => setState({ password: e.target.value })}
-            value={state.password || ''}
+            value={password}
+            onChange={(e) => setState({ ...state, password: e.target.value })}
           />
           <ContentInfoWrapper>
             <BornDate>Date of birth</BornDate>
@@ -82,7 +68,9 @@ export default function EmailAndPasswordRegister({ isOpen, onDismiss }) {
             </BornDateInfo>
           </ContentInfoWrapper>
           <SelectesWrapper>
-            <MonthSelect onChange={handleSelectMonth}>
+            <MonthSelect
+              onChange={(e) => setState({ ...state, month: e.target.value })}
+            >
               <SelectOptions value="January">January</SelectOptions>
               <SelectOptions value="February">February</SelectOptions>
               <SelectOptions value="March">March</SelectOptions>
@@ -96,7 +84,9 @@ export default function EmailAndPasswordRegister({ isOpen, onDismiss }) {
               <SelectOptions value="November">November</SelectOptions>
               <SelectOptions value="December">December</SelectOptions>
             </MonthSelect>
-            <DaySelect onChange={handleSelectDay}>
+            <DaySelect
+              onChange={(e) => setState({ ...state, day: e.target.value })}
+            >
               <SelectOptions value="1">1</SelectOptions>
               <SelectOptions value="2">2</SelectOptions>
               <SelectOptions value="3">3</SelectOptions>
@@ -130,7 +120,9 @@ export default function EmailAndPasswordRegister({ isOpen, onDismiss }) {
               <SelectOptions value="30">30</SelectOptions>
               <SelectOptions value="31">31</SelectOptions>
             </DaySelect>
-            <YearSelect onChange={handleSelectYear}>
+            <YearSelect
+              onChange={(e) => setState({ ...state, year: e.target.value })}
+            >
               <SelectOptions value="2022">2022</SelectOptions>
               <SelectOptions value="2021">2021</SelectOptions>
               <SelectOptions value="2020">2020</SelectOptions>
